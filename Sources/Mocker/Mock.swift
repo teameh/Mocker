@@ -354,8 +354,10 @@ public struct Mock: Equatable {
             return fileExtensions.contains(pathExtension)
         }
 
-        if mock.ignoreQuery, mock.request.url!.baseString != request.url?.baseString {
-            return false
+        if mock.ignoreQuery {
+            if mock.request.url!.baseString != request.url?.baseString {
+                return false
+            }
         } else if mock.request.url!.absoluteString != request.url?.absoluteString {
             return false
         }
